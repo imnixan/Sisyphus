@@ -20,7 +20,7 @@ public class GUIManager : MonoBehaviour
     private float currentAnimPoint;
     float fillPercent;
 
-    public void StartInit(float failPoint)
+    public void Init(float failPoint)
     {
         this.failPoint = Mathf.Abs(failPoint);
         this.scaleLength = 1 + this.failPoint;

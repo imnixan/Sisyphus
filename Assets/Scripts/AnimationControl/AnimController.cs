@@ -21,11 +21,18 @@ public class AnimController : MonoBehaviour
     [SerializeField]
     private GUIManager guiManager;
 
-    private Animator animator;
-
     [SerializeField]
     private GameEnum.GameState _gameState;
 
+    [SerializeField]
+    private Transform stone;
+
+    [SerializeField]
+    private HeightCounter heightCounter;
+
+    private Rigidbody stoneRb;
+
+    private Animator animator;
     private GameEnum.GameState GameState
     {
         get { return _gameState; }
@@ -85,10 +92,12 @@ public class AnimController : MonoBehaviour
 
     private void Start()
     {
+        stoneRb = stone.GetComponentInChildren<Rigidbody>();
         animator = GetComponent<Animator>();
         animator.speed = 0;
         GameState = GameEnum.GameState.PreStart;
-        guiManager.StartInit(failPoint);
+        guiManager.Init(failPoint);
+        TurnOffPhysic();
     }
 
     private void FixedUpdate()
@@ -109,11 +118,7 @@ public class AnimController : MonoBehaviour
             animator.Play(
                 animStates[GameState],
                 0,
-                Mathf.Lerp(
-                    animator.GetCurrentAnimatorStateInfo(0).normalizedTime,
-                    animPoint,
-                    Time.fixedDeltaTime
-                )
+                Mathf.Lerp(animator.GetCurrentAnimatorStateInfo(0).normalizedTime, animPoint, 0.05f)
             );
         }
     }
@@ -129,6 +134,7 @@ public class AnimController : MonoBehaviour
     private void MoveLeg(float step)
     {
         animPoint += step;
+        heightCounter.UpdateHeight(step);
         guiManager.UpdateScale(animPoint);
         if (animPoint >= 1)
         {
@@ -139,6 +145,8 @@ public class AnimController : MonoBehaviour
         {
             GameState = GameEnum.GameState.EndGame;
         }
+
+        stone.Rotate(step * 5, 0, 0);
     }
 
     private void ChangeLeg()
@@ -167,8 +175,29 @@ public class AnimController : MonoBehaviour
             case GameEnum.GameState.RightLegPushin:
                 break;
             case GameEnum.GameState.EndGame:
-                Debug.Log("EndGame");
+                TurnOnPhysic();
                 break;
+        }
+    }
+
+    private void TurnOnPhysic()
+    {
+        stoneRb.isKinematic = false;
+        animator.enabled = false;
+        this.enabled = false;
+        foreach (var rb in GetComponentsInChildren<Rigidbody>())
+        {
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = false;
+        }
+    }
+
+    private void TurnOffPhysic()
+    {
+        stoneRb.isKinematic = true;
+        foreach (var rb in GetComponentsInChildren<Rigidbody>())
+        {
+            rb.isKinematic = true;
         }
     }
 }
