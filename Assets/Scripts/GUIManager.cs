@@ -8,9 +8,11 @@ public class GUIManager : MonoBehaviour
     private Image powerScaleFill;
 
     [SerializeField]
-    private RectTransform leftBtn,
-        rightBtn,
-        fingerPoint;
+    private Image leftBtn,
+        rightBtn;
+
+    [SerializeField]
+    private Color correctBtnColor;
 
     [SerializeField]
     private float animLength;
@@ -31,7 +33,7 @@ public class GUIManager : MonoBehaviour
         currentAnimPoint = animPoint + failPoint;
         fillPercent = currentAnimPoint / scaleLength;
         powerScaleFill.fillAmount = fillPercent;
-        powerScaleFill.color = new Color(fillPercent, 1 - fillPercent, 0, 1);
+        powerScaleFill.color = new Color(1 - fillPercent, fillPercent, 0, 1);
     }
 
     public void PointToBtn(GameEnum.GameState gameState)
@@ -39,11 +41,14 @@ public class GUIManager : MonoBehaviour
         switch (gameState)
         {
             case GameEnum.GameState.LeftLegPushin:
-                fingerPoint.DOAnchorPosX(leftBtn.anchoredPosition.x, animLength).PlayForward();
+                leftBtn.DOColor(correctBtnColor, animLength).PlayForward();
+                rightBtn.DOColor(Color.white, animLength).PlayForward();
                 break;
 
             case GameEnum.GameState.RightLegPushin:
-                fingerPoint.DOAnchorPosX(rightBtn.anchoredPosition.x, animLength).PlayForward();
+
+                rightBtn.DOColor(correctBtnColor, animLength).PlayForward();
+                leftBtn.DOColor(Color.white, animLength).PlayForward();
                 break;
         }
     }
