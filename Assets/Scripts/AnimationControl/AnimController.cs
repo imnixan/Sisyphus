@@ -175,9 +175,15 @@ public class AnimController : MonoBehaviour
             case GameEnum.GameState.RightLegPushin:
                 break;
             case GameEnum.GameState.EndGame:
-                TurnOnPhysic();
+                EndGame();
                 break;
         }
+    }
+
+    private void EndGame()
+    {
+        TurnOnPhysic();
+        guiManager.ShowEndGame(heightCounter.GetHeight());
     }
 
     private void TurnOnPhysic()

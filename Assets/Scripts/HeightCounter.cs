@@ -18,6 +18,12 @@ public class HeightCounter : MonoBehaviour
         {
             height = 0;
         }
-        heightText.text = height.ToString("F2");
+        height = (float)System.Math.Round(height, 2);
+        heightText.text = height.ToString();
+    }
+
+    public float GetHeight()
+    {
+        return height;
     }
 }
