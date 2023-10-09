@@ -7,6 +7,9 @@ using UnityEngine.XR;
 public class AnimController : MonoBehaviour
 {
     [SerializeField]
+    private SoundManager soundManager;
+
+    [SerializeField]
     private float forwardStep;
 
     [SerializeField]
@@ -154,6 +157,7 @@ public class AnimController : MonoBehaviour
         GameState = oppositeLegs[GameState];
         animator.Play(animStates[GameState], 0, 0);
         guiManager.PointToBtn(GameState);
+        soundManager.PlayScream();
     }
 
     private void SetFirstLeg(GameEnum.GameState firstLeg)

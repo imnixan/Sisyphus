@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.68225217, g: 0.54157376, b: 0.36990234, a: 1}
+  m_IndirectSpecularColor: {r: 0.6457423, g: 0.5125791, b: 0.34991235, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -413,7 +413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &134280919
 RectTransform:
   m_ObjectHideFlags: 0
@@ -987,8 +987,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -40, y: -50}
+  m_AnchoredPosition: {x: 0, y: 0.9681015}
+  m_SizeDelta: {x: -19.3624, y: -29.0435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &340950527
 MonoBehaviour:
@@ -1006,16 +1006,16 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1555351858, guid: ecf692a654548894ababe104ed99aa85, type: 3}
+  m_Sprite: {fileID: -1235859800, guid: ecf692a654548894ababe104ed99aa85, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1181,7 +1181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0
@@ -2715,6 +2715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5143561b32d4fc14e957d573ce9d01bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 1325916006}
   forwardStep: 0.2
   backwardStep: -0.01
   failPoint: -0.5
@@ -3062,6 +3063,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memeSound: {fileID: 8300000, guid: 5512eb429a638434c9b3fc2732946bbb, type: 3}
+  screamSounds:
+  - {fileID: 8300000, guid: 4b50273723975684b949a63748b913fb, type: 3}
+  - {fileID: 8300000, guid: 138d2ca345570d54793f9c0692f82278, type: 3}
+  - {fileID: 8300000, guid: 7658f515dc60aaa439a7c9d266c2c770, type: 3}
+  - {fileID: 8300000, guid: 51a01def32e65604ab3a30c3ef3b9232, type: 3}
+  - {fileID: 8300000, guid: 01950fe843502474695dbfd5f62ba830, type: 3}
+  - {fileID: 8300000, guid: 62bf9e2ab6173e248bedad5611800ab2, type: 3}
 --- !u!1 &1343911558
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,11 +3106,11 @@ RectTransform:
   m_Father: {fileID: 1070520671}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 25}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 600, y: 120}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1343911560
 MonoBehaviour:
   m_ObjectHideFlags: 0
