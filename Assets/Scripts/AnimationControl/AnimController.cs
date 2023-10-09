@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.Events;
 
 public class AnimController : MonoBehaviour
 {
+    public event UnityAction legPicked,
+        wrondLegClicked,
+        legChanged;
+
     [SerializeField]
     private SoundManager soundManager;
 
@@ -69,31 +73,39 @@ public class AnimController : MonoBehaviour
 
     public void PushLeftLeg()
     {
-        SetFirstLeg(GameEnum.GameState.LeftLegPushin);
-        if (GameState == GameEnum.GameState.LeftLegPushin)
+        if (this.enabled)
         {
-            MoveLeg(forwardStep);
-        }
-        else
-        {
-            MoveLeg(backwardStep);
+            SetFirstLeg(GameEnum.GameState.LeftLegPushin);
+            if (GameState == GameEnum.GameState.LeftLegPushin)
+            {
+                MoveLeg(forwardStep);
+            }
+            else
+            {
+                wrondLegClicked?.Invoke();
+                MoveLeg(backwardStep);
+            }
         }
     }
 
     public void PushRightLeg()
     {
-        SetFirstLeg(GameEnum.GameState.RightLegPushin);
-        if (GameState == GameEnum.GameState.RightLegPushin)
+        if (this.enabled)
         {
-            MoveLeg(forwardStep);
-        }
-        else
-        {
-            MoveLeg(-forwardStep);
+            SetFirstLeg(GameEnum.GameState.RightLegPushin);
+            if (GameState == GameEnum.GameState.RightLegPushin)
+            {
+                MoveLeg(forwardStep);
+            }
+            else
+            {
+                wrondLegClicked?.Invoke();
+                MoveLeg(-forwardStep);
+            }
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         stoneRb = stone.GetComponentInChildren<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -158,6 +170,7 @@ public class AnimController : MonoBehaviour
         animator.Play(animStates[GameState], 0, 0);
         guiManager.PointToBtn(GameState);
         soundManager.PlayScream();
+        legChanged?.Invoke();
     }
 
     private void SetFirstLeg(GameEnum.GameState firstLeg)
@@ -167,6 +180,7 @@ public class AnimController : MonoBehaviour
             GameState = firstLeg;
             guiManager.PointToBtn(GameState);
             animPoint = 0;
+            legPicked?.Invoke();
         }
     }
 

@@ -82,7 +82,7 @@ public class GUIManager : MonoBehaviour
         endAnim
             .Append(leftBtnRt.DOAnchorPosY(-1000, animLength))
             .Join(rightBtnRt.DOAnchorPosY(-1000, animLength))
-            .Join(scale.DOAnchorPosY(-1000, animLength))
+            .Join(scale.DOAnchorPosY(1000, animLength))
             .Append(btns.DOAnchorPosY(15, animLength))
             .Append(endGameWindow.DOAnchorPos(Vector2.zero, animLength))
             .AppendCallback(() =>

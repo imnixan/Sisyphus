@@ -23,6 +23,12 @@ public class Menu : MonoBehaviour
         goSettings,
         backMenu;
 
+    private void OnEnable()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+        Application.targetFrameRate = 300;
+    }
+
     private void Start()
     {
         ColorizeBtns();
